@@ -90,7 +90,90 @@ public class FileLectureDao implements LectureDao {
     }
 
     @Override
-    public Lecture get(String id) {
+    public Lecture get(String id){
+
+        String state = Environment.getExternalStorageState();
+
+        if(state.equals(Environment.MEDIA_MOUNTED)) {
+
+
+            File root = Environment.getExternalStorageDirectory();
+            //-->/storage/emulated/0/
+
+            File file = new File(root.getAbsolutePath(), "data.txt");
+
+            if (file.exists()) {
+
+                StringBuilder text = new StringBuilder();
+
+                try {
+                    FileInputStream fileInputStream = new FileInputStream(file);
+                    //byte 단위로 inputStream <-> char Reader
+                    InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                    String line = "";
+
+
+                    while ((line = bufferedReader.readLine()) != null) {
+
+                        if(line.indexOf("{") < 0 )
+                            continue;
+
+                        if(line.endsWith(",")){
+
+                            String sub  = line.substring(0,line.lastIndexOf(","));
+
+                            Gson gson = new Gson();
+
+                            Lecture lecture = gson.fromJson(sub, Lecture.class);
+
+                            if(lecture.getId().equals(id))
+                                return lecture;
+
+                         }
+                         else
+                        {
+                            Gson gson = new Gson();
+
+                            Lecture lecture = gson.fromJson(line, Lecture.class);
+
+                            if(lecture.getId().equals(id))
+                                return lecture;
+                        }
+
+
+
+                        Log.d("lecture json",line);
+
+                             text.append(line);
+
+                    }
+
+                    List<Lecture> list = new ArrayList<>();
+
+                    JsonArray arr = new JsonParser().parse(text.toString()).getAsJsonArray();
+
+                    Gson gson = new Gson();
+                    Lecture lecture = gson.fromJson(arr.get(Integer.parseInt(id)), Lecture.class);
+
+
+                    return lecture;
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                Toast.makeText(MainActivity.getinstance(),"File NOT Found",Toast.LENGTH_LONG).show();
+            }
+        }
+        else{
+            Toast.makeText(MainActivity.getinstance(),"SD Card NOT Found",Toast.LENGTH_LONG).show();
+        }
         return null;
     }
 }

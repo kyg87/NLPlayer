@@ -105,13 +105,11 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                String lectureId = lectures.remove(position).getId();
-                adapter.notifyDataSetChanged();
+                String lectureId = lectures.get(position).getId();
+
                 Intent intent = new Intent(MainActivity.this, LectureDetailActivity.class);
                 intent.putExtra("id",lectureId);
                 startActivity(intent);
-
-
 
                 /*lectures.remove(position);
                 adapter.notifyDataSetChanged();*/

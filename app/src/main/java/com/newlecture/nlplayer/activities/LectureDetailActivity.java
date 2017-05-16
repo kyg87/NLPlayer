@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.newlecture.nlplayer.R;
+import com.newlecture.nlplayer.daos.FileLectureDao;
+import com.newlecture.nlplayer.daos.LectureDao;
+import com.newlecture.nlplayer.entities.Lecture;
 
 public class LectureDetailActivity extends Activity {
 
+    private LectureDao fileLectureDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,11 +20,18 @@ public class LectureDetailActivity extends Activity {
 
         Intent intent = this.getIntent();
 
-        String code = intent.getStringExtra("id");
+        String id = intent.getStringExtra("id");
 
-        TextView txtView = (TextView) findViewById(R.id.textView);
+        fileLectureDao = new FileLectureDao();
+        Lecture lectures = fileLectureDao.get(id);
 
-        txtView.setText(code);
+        TextView txtView = (TextView) findViewById(R.id.tvTitle);
+
+        txtView.setText(lectures.getTitle());
+
+     /*   TextView txtView = (TextView) findViewById(R.id.textView);
+
+        txtView.setText(code);*/
 
     }
 }
