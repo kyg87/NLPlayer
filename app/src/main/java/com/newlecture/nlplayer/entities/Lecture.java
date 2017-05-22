@@ -9,6 +9,10 @@ public class Lecture {
     private String title;
     private int price;
 
+    public  Lecture(){
+
+    }
+
     public Lecture(String id, String title, int price) {
         this.id = id;
         this.title = title;

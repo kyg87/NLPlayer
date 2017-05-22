@@ -25,6 +25,7 @@ import com.newlecture.nlplayer.R;
 import com.newlecture.nlplayer.adapters.LectureAdapter;
 import com.newlecture.nlplayer.daos.FileLectureDao;
 import com.newlecture.nlplayer.daos.LectureDao;
+import com.newlecture.nlplayer.daos.SqlLectureDao;
 import com.newlecture.nlplayer.entities.Lecture;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class MainActivity extends Activity {
     private List<Lecture> lectures;
 
     private LectureDao fileLectureDao;
+
+    private  LectureDao sqlLectureDao;
     public MainActivity(){
 
         mainActivity = this;
@@ -72,9 +75,13 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         //요부분만 바꾸면 다른파일로 가능
-        fileLectureDao = new FileLectureDao();
-        lectures = fileLectureDao.getList(1);
+        /*fileLectureDao = new FileLectureDao();
+        lectures = fileLectureDao.getList(1);*/
 
+        sqlLectureDao = new SqlLectureDao(this);
+        lectures = sqlLectureDao.getList(1);
+
+        /*
         int permission = ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE);
 
@@ -83,7 +90,7 @@ public class MainActivity extends Activity {
                   new  String[]{ android.Manifest.permission.READ_EXTERNAL_STORAGE
             },1);
         }
-
+        */
 
         //android.R.layout.simple_list_item_1
         //lectures

@@ -8,11 +8,12 @@ import android.widget.TextView;
 import com.newlecture.nlplayer.R;
 import com.newlecture.nlplayer.daos.FileLectureDao;
 import com.newlecture.nlplayer.daos.LectureDao;
+import com.newlecture.nlplayer.daos.SqlLectureDao;
 import com.newlecture.nlplayer.entities.Lecture;
 
 public class LectureDetailActivity extends Activity {
 
-    private LectureDao fileLectureDao;
+    private LectureDao lectureDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +23,8 @@ public class LectureDetailActivity extends Activity {
 
         String id = intent.getStringExtra("id");
 
-        fileLectureDao = new FileLectureDao();
-        Lecture lectures = fileLectureDao.get(id);
+        lectureDao = new SqlLectureDao(this);
+        Lecture lectures = lectureDao.get(id);
 
         TextView txtView = (TextView) findViewById(R.id.tvTitle);
 
@@ -32,6 +33,8 @@ public class LectureDetailActivity extends Activity {
      /*   TextView txtView = (TextView) findViewById(R.id.textView);
 
         txtView.setText(code);*/
+
+     //--itemListView의 데이터를 바인딩
 
     }
 }

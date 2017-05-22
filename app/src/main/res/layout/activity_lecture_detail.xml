@@ -1,91 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="95dp"
-        android:padding="5dp"
-        android:id="@+id/root"
-        android:background="#ffffffff">
+        android:background="#ffffffff"
+        android:padding="5dp">
 
         <ImageView
+            android:id="@+id/ivVideo"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:id="@+id/ivVideo"
             android:src="@drawable/blank" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/ivStatus"
-            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/event"
-            android:layout_alignWithParentIfMissing="false" />
+            android:layout_alignParentRight="true"
+            android:layout_alignWithParentIfMissing="false"
+            android:src="@drawable/event" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="웹 표준 기반의 HTML3 CSS3"
             android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/ivVideo"
-            android:textSize="16dp"
-            android:textStyle="bold"
+            android:text="웹 표준 기반의 HTML3 CSS3"
             android:textColor="#000000"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp" />
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="99,000"
             android:id="@+id/tvPrice"
-            android:layout_toRightOf="@+id/ivVideo"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@+id/tvTitle" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="29,000"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/ivVideo"
+            android:text="99,000" />
+
+        <TextView
             android:id="@+id/tvSale"
-            android:layout_toRightOf="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
+            android:layout_toRightOf="@+id/tvPrice"
+            android:text="29,000"
             android:textColor="#fffe682d" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="원"
+            android:layout_marginTop="30dp"
             android:layout_toRightOf="@+id/tvSale"
-            android:layout_marginTop="30dp" />
+            android:text="원" />
 
         <TextView
+            android:id="@+id/lblDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최종업데이트 : "
-            android:id="@+id/lblDate"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/ivVideo"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp" />
+            android:text="최종업데이트 : " />
 
         <TextView
+            android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2014.07"
-            android:id="@+id/tvDate"
-            android:layout_toRightOf="@+id/lblDate"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/lblDate"
+            android:text="2014.07" />
 
     </RelativeLayout>
 
+    <ExpandableListView
+        android:id="@+id/itemListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>
